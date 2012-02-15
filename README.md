@@ -26,7 +26,7 @@ This directory's permissions MUST be `chmod 755`
 
 The directory called `secret` must also have the same permissions set as the parent directory. 
 
-* You will need to modify the `variables.php` file and set your file specific info.
+You will need to modify the `variables.php` file and set your file specific info.
 
 	// The actual file (path starts from this directory forward)
  	define('PROTECTED_DOWNLOAD','secret/friday.zip');
@@ -43,8 +43,8 @@ The directory called `secret` must also have the same permissions set as the par
 	// The expiration date of the link (examples: +1 year, +5 days, +13 hours)
 	define('EXPIRATION_DATE', '+1 month');
 
-* Once this is in place, you are ready to generate a new download key. To do this, you will need to use the password you set in the variables file. In the example above, that is `1234`
+Once this is in place, you are ready to generate a new download key. To do this, you will need to use the password you set in the variables file. In the example above, that is `1234`
 
-* Navigate to `example.com/singleuse/generate.php?1234` (Notice the `?1234` a the end — that is your password)
+Navigate to `example.com/singleuse/generate.php?1234` (Notice the `?1234` a the end — that is your password)
 
-* Copy the link that is generated and send it off. Voila! Done.
+Copy the link that is generated and send it off. Voila! Done.

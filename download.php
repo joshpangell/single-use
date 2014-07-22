@@ -44,6 +44,7 @@
 		 */
 		$contenttype = CONTENT_TYPE;
 		$filename = SUGGESTED_FILENAME;
+		set_time_limit(0);
 		header("Content-type: {$contenttype}");
 		header("Content-Disposition: attachment; filename=\"{$filename}\"");
 		readfile(PROTECTED_DOWNLOAD);

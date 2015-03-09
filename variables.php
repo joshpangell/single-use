@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  *	Single use download variables
  *	Defines where the actual download location is

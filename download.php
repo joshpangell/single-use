@@ -44,10 +44,15 @@
 		 */
 		$contenttype = CONTENT_TYPE;
 		$filename = SUGGESTED_FILENAME;
+		$file = PROTECTED_DOWNLOAD;
 		set_time_limit(0);
+		header("Content-Description: File Transfer");
 		header("Content-type: {$contenttype}");
 		header("Content-Disposition: attachment; filename=\"{$filename}\"");
-		readfile(PROTECTED_DOWNLOAD);
+		header("Content-Length: " . filesize($file));
+		header('Pragma: public');
+		header("Expires: 0");
+		readfile($file);
 		
 		// Exit
 		exit;

@@ -10,6 +10,13 @@
 	
 	// Grab the query string as a password
 	$password = trim($_SERVER['QUERY_STRING']);
+
+	// Get a human readable file size from bytes
+	function human_filesize($bytes, $decimals = 2) {
+		$sz = 'BKMGTP';
+		$factor = floor((strlen($bytes) - 1) / 3);
+		return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sz[$factor];
+	}
 	
 	/*
 	 *	Verify the admin password (in variables.php)
@@ -50,6 +57,8 @@
 		Your new single-use download link:<br>
 		<nl><?php 
 			echo "http://" . $_SERVER['HTTP_HOST'] . DOWNLOAD_PATH . "?" . $new; 
+			echo "<br>";
+			echo "Size: " . human_filesize(filesize(PROTECTED_DOWNLOAD), 2);
 		?></nl>
 	</body>
 </html>

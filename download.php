@@ -10,7 +10,8 @@
 	include("variables.php");
 	
 	// The input string
-	$key = trim($_SERVER['QUERY_STRING']);
+	$key = trim($_GET['key']);
+	$i = trim($_GET['i']);
 	
 	/*
 	 *	Retrive the keys
@@ -42,9 +43,10 @@
 		/*
 		 *	Forces the browser to download a new file
 		 */
-		$contenttype = CONTENT_TYPE;
-		$filename = SUGGESTED_FILENAME;
-		$file = PROTECTED_DOWNLOAD;
+		$contenttype = $PROTECTED_DOWNLOADS[$i]['content_type'];
+		$filename = $PROTECTED_DOWNLOADS[$i]['suggested_name'];
+		$file = $PROTECTED_DOWNLOADS[$i]['protected_path'];
+
 		set_time_limit(0);
 		header("Content-Description: File Transfer");
 		header("Content-type: {$contenttype}");

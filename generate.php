@@ -22,44 +22,68 @@
 	 *	Verify the admin password (in variables.php)
 	 */ 
 	if($password == ADMIN_PASSWORD) {
-		// Create a new key
-		$new = uniqid('key',TRUE);
+		// Create a list of files to download from
+		$download_list = array();
 		
-		/*
-		 *	Create a protected directory to store keys in
-		 */
-		if(!is_dir('keys')) {
-			mkdir('keys');
-			$file = fopen('keys/.htaccess','w');
-			fwrite($file,"Order allow,deny\nDeny from all");
-			fclose($file);
+		if(is_array($PROTECTED_DOWNLOADS)) {
+			foreach ($PROTECTED_DOWNLOADS as $key => $download) {
+				// Create a new key
+				$new = uniqid('key',TRUE);
+				
+				// get download link and file size
+				$download_link = "http://" . $_SERVER['HTTP_HOST'] . DOWNLOAD_PATH . "?key=" . $new . "&i=" . $key; 
+				$filesize = human_filesize(filesize($download['protected_path']), 2);
+
+				// Add to the download list
+				$download_list[] = array(
+					'download_link' => $download_link,
+					'filesize' => $filesize
+				);
+
+				/*
+				 *	Create a protected directory to store keys in
+				 */
+				if(!is_dir('keys')) {
+					mkdir('keys');
+					$file = fopen('keys/.htaccess','w');
+					fwrite($file,"Order allow,deny\nDeny from all");
+					fclose($file);
+				}
+				
+				/*
+				 *	Write the key key to the keys list
+				 */
+				$file = fopen('keys/keys','a');
+				fwrite($file,"{$new}\n");
+				fclose($file);
+			}
 		}
 		
-		/*
-		 *	Write the key key to the keys list
-		 */
-		$file = fopen('keys/keys','a');
-		fwrite($file,"{$new}\n");
-		fclose($file);
 ?>
 
 <html>
 	<head>
 		<title>Download created</title>
 		<style>
-			nl { 
-				font-family: monospace 
-			}
+			body {
+	    		padding-top: 25px;
+	    	}
 		</style>
 	</head>
 	<body>
-		<h1>Download key created</h1>
-		Your new single-use download link:<br>
-		<nl><?php 
-			echo "http://" . $_SERVER['HTTP_HOST'] . DOWNLOAD_PATH . "?" . $new; 
-			echo "<br>";
-			echo "Size: " . human_filesize(filesize(PROTECTED_DOWNLOAD), 2);
-		?></nl>
+		 <div class="container">
+			<h1>Download key created</h1>
+			<h6>Your new single-use download links:<h6><br>
+			<? foreach ($download_list as $download) { ?>			
+			<h4>
+				<a href="<?= $download['download_link'] ?>"><?= $download['download_link'] ?></a><br>
+				Size: <?= $download['filesize'] ?>
+			</h4>
+			<? } ?>
+			
+			<br><br>
+			<a href="/singleuse">Back to the demo</a>
+		</div>
 	</body>
 </html>
 

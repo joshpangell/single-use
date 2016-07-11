@@ -64,6 +64,10 @@
 <html>
 	<head>
 		<title>Download created</title>
+		<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+	    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+	    <link href="bootstrap/css/docs.css" rel="stylesheet">
+	    <link href="bootstrap/google-code-prettify/prettify.css" rel="stylesheet">
 		<style>
 			body {
 	    		padding-top: 25px;

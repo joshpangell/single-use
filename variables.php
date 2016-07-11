@@ -8,22 +8,22 @@
  *	Sets a date when the file will expire (examples: +1 year, +5 days, +13 hours)
  */	
  	
- 	// Arrays of content type, suggested names and protected names
- 	$PROTECTED_DOWNLOADS = array(
+	// Arrays of content type, suggested names and protected names
+	$PROTECTED_DOWNLOADS = array(
 		array(
 			'content_type' => 'application/zip', 
-			'suggested_name' => 'best-song-evar.zip', 
-			'protected_path' => 'secret/friday.zip'
+			'suggested_name' => 'computing.zip', 
+			'protected_path' => 'secret/file1.zip'
 		),
 		array(
 			'content_type' => 'application/zip', 
-			'suggested_name' => 'another-song.zip', 
+			'suggested_name' => 'star.zip', 
 			'protected_path' => 'secret/file2.zip'
 		)
 	);
 
 	// The path to the download.php file (probably same dir as this file)
- 	define('DOWNLOAD_PATH','/singleuse/multifile/download.php');
+ 	define('DOWNLOAD_PATH','/singleuse/download.php');
 	
 	// The admin password to generate a new download link
 	define('ADMIN_PASSWORD','1234');

@@ -15,6 +15,10 @@ For instance, if you wanted to sell a song for your band. You sold the song on y
 
 You can also mask the name of the file being downloaded, for further protection. For example, if your song was called "greatsong.zip", you could set the download link as "Band_Awesome-Awesome_Song.zip" (it is not a good idea to leave spaces in URL titles)
 
+## Update
+
+On July 11, 2016 a multi-file feature branch was merged with the single file. It is now possible to download multiple files at once. 
+
 ## Usage
 
 All files must be uploaded to a directory on your server. 
@@ -28,14 +32,22 @@ The directory called `secret` must also have the same permissions set as the par
 
 You will need to modify the `variables.php` file and set your file specific info.
 
-	// The actual file (path starts from this directory forward)
- 	define('PROTECTED_DOWNLOAD','secret/friday.zip');
- 	
- 	// The path to the download.php file (probably same dir as this file)
+	// Arrays of content type, suggested names and protected names
+	$PROTECTED_DOWNLOADS = array(
+		array(
+			'content_type' => 'application/zip', 
+			'suggested_name' => 'computing.zip', 
+			'protected_path' => 'secret/file1.zip'
+		),
+		array(
+			'content_type' => 'application/zip', 
+			'suggested_name' => 'star.zip', 
+			'protected_path' => 'secret/file2.zip'
+		)
+	);
+
+	// The path to the download.php file (probably same dir as this file)
  	define('DOWNLOAD_PATH','/singleuse/download.php');
-	
-	// What the file will be displayed to users as
-	define('SUGGESTED_FILENAME','best-song-evar.zip');
 	
 	// The admin password to generate a new download link
 	define('ADMIN_PASSWORD','1234');

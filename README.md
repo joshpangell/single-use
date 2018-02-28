@@ -17,6 +17,8 @@ You can also mask the name of the file being downloaded, for further protection.
 
 ## Update
 
+On Feb 28, 2018 a feature was added to allow remote files to be downloaded, in addition to local files
+
 On July 11, 2016 a multi-file feature branch was merged with the single file. It is now possible to download multiple files at once. 
 
 ## Usage

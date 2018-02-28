@@ -46,15 +46,30 @@
 		$contenttype = $PROTECTED_DOWNLOADS[$i]['content_type'];
 		$filename = $PROTECTED_DOWNLOADS[$i]['suggested_name'];
 		$file = $PROTECTED_DOWNLOADS[$i]['protected_path'];
+		$remote_file = $PROTECTED_DOWNLOADS[$i]['remote_path'];
 
 		set_time_limit(0);
-		header("Content-Description: File Transfer");
-		header("Content-type: {$contenttype}");
-		header("Content-Disposition: attachment; filename=\"{$filename}\"");
-		header("Content-Length: " . filesize($file));
-		header('Pragma: public');
-		header("Expires: 0");
-		readfile($file);
+
+		// If a remote file is set
+		if($remote_file) {
+
+			$file=fopen($remote_file,'r');
+			header("Content-Type:text/plain");
+			header("Content-Disposition: attachment; filename=\"{$filename}\"");
+			fpassthru($file);
+
+		// This is a local file
+		} else {
+		
+			header("Content-Description: File Transfer");
+			header("Content-type: {$contenttype}");
+			header("Content-Disposition: attachment; filename=\"{$filename}\"");
+			header("Content-Length: " . filesize($file));
+			header('Pragma: public');
+			header("Expires: 0");
+			readfile($file);
+
+		}
 		
 		// Exit
 		exit;

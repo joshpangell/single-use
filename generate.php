@@ -78,10 +78,10 @@
 		 <div class="container">
 			<h1>Download key created</h1>
 			<h6>Your new single-use download links:<h6><br>
-			<? foreach ($download_list as $download) { ?>			
+			<?php foreach ($download_list as $download) { ?>			
 			<h4>
-				<a href="<?= $download['download_link'] ?>"><?= $download['download_link'] ?></a><br>
-				Size: <?= $download['filesize'] ?>
+				<a href="<?php echo $download['download_link'] ?>"><?php echo $download['download_link'] ?></a><br>
+				Size: <?php echo $download['filesize'] ?>
 			</h4>
 			<? } ?>
 			
